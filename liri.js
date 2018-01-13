@@ -13,16 +13,25 @@ var track = process.argv[3];
 switch (command) {
 	case "my-tweets": 
 		myTweets();
+		break;
+	case "spotify-this":
+		spotifyThisSong();
+		break;
+	case "do-what-i-say":
+		doWhatItSays();
+		break;
+default: console.log("invalid");
 };
 
 
 
 function myTweets() {
-	var client = new Twitter(key);
+	var client = new Twitter(key.twitter);
 	var parameters = {
 		screen_name: 'slowtocode', 
 		count: 20
 	};
+	
 client.get('statuses/user_timeline', parameters, function(error, tweets, response){
 	if (error){
 		console.log(error);
@@ -45,7 +54,7 @@ var spotify = new spotifyAPI({
 	id: "493a072918fc4c219a7e302f9880e5b9",
 	secret: "b1e2191ee570456e8276d65a12808ce6"
 });
-spotify.serch({type: 'track', query: track}, function(error, data){
+spotify.search({type: 'track', query: track}, function(error, data){
 	if (error) {
 		return console.log("ERROR" + error);
 	}
